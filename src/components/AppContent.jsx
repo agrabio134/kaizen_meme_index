@@ -1,17 +1,10 @@
+// AppContent.js - Updated with new logo URL
 import React, { useState, useEffect } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'; // Named import
 import Dashboard from './Dashboard';
-//fontawesome icon twitter 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
-
-
 
 const AppContent = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const { connected, publicKey } = useWallet();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -19,48 +12,61 @@ const AppContent = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
   const copyCa = () => {
-    return () => {
-      navigator.clipboard.writeText('HygZx5u3aaXg38grfa39Y59NSGFQXSMCUyAYWoZfpump');
-      Swal.fire({
-        title: 'Contract Address Copied!',
-        text: 'The contract address has been copied to your clipboard.',
-        icon: 'success',
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    };
-  }
+    navigator.clipboard.writeText('3ejk8LXAS9kUC7XhpDGHRjARyUy5qU7PaAq7PMykpump');
+    Swal.fire({
+      title: 'Copied!',
+      text: 'Contract address copied to clipboard',
+      icon: 'success',
+      timer: 1800,
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      background: '#000',
+      color: '#0f0',
+    });
+  };
 
   return (
     <div className="app">
-      <header>
-        <div className="ca-header" onClick={copyCa()}>CA: HygZx5u3aaXg38grfa39Y59NSGFQXSMCUyAYWoZfpump</div>
+      <header className="header-cyberpunk">
+        <div className="scanline-top" />
+        <div className="scanline-bottom" />
+        <div className="header-glow-left" />
+        <div className="header-glow-right" />
+        <div className="header-grid-overlay" />
 
-        <div className="nav-section">
-          <div className="logo">
-            <div className="logo-item">
-              <img src="logo-square.png" alt="Polymi Logo"
-                style={{ width: '50px', height: '50px', borderRadius: '25px' }}
-              />
+        <div className="header-inner">
+          <div className="brand-section">
+            <div className="logo-container">
+              <div className="logo-ring-outer">
+                <div className="logo-ring-inner">
+                  <img 
+                    src="https://l5fpqchmvmrcwa0k.public.blob.vercel-storage.com/character-avatars/e2bde479-5ea5-424c-b36b-cd51d8cd0aab/1766937255758-photo_6235780279272410482_y.jpg" 
+                    alt="KAIZEN-OS" 
+                    className="logo-img" 
+                  />
+                </div>
+              </div>
             </div>
-            <div className="logo-item logo-text">
 
-              <h1> POLYMI</h1>
-              <span>POLY Meme Index</span>
+            <div className="title-container">
+              <h1 className="title-main glitch-cyber">KAIZEN-OS</h1>
+              <div className="title-sub">ADVANCED MEME INDEX TERMINAL</div>
             </div>
-
-          </div>
-          <div className="nav-right">
-            <a href="https://x.com/polymi_ai" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faXTwitter} />
-            </a>
-            <WalletMultiButton />
           </div>
 
+          <div className="ca-module">
+            <button className="ca-button neon-frame" onClick={copyCa}>
+              <span className="ca-label">CONTRACT ADDRESS</span>
+              <span className="ca-hash">3ejk8LXA...Mykpump</span>
+            </button>
+          </div>
         </div>
       </header>
-      <Dashboard isMobile={isMobile} connected={connected} publicKey={publicKey} />
+
+      <Dashboard isMobile={isMobile} />
     </div>
   );
 };
