@@ -7,6 +7,7 @@ const TweetModal = ({ tweet, onClose }) => {
   let imageUrl = null;
   let videoUrl = null;
 
+  // Process media from tweet
   if (tweet.entities?.urls) {
     tweet.entities.urls.forEach(urlObj => {
       const expanded = urlObj.expanded_url || urlObj.url;
@@ -37,22 +38,31 @@ const TweetModal = ({ tweet, onClose }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="tweet-modal" onClick={e => e.stopPropagation()}>
+      <div className="boost-modal tweet-modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Tweet Details</h2>
           <button onClick={onClose}>×</button>
         </div>
-        <div className="tweet-content">
+
+        <div className="modal-content tweet-content">
           <div className="tweet-profile">
-            {tweet.user?.profile_image_url && <img src={tweet.user.profile_image_url.replace('_normal', '_bigger')} alt={tweet.user.name} className="tweet-pfp" />}
+            {tweet.user?.profile_image_url && (
+              <img
+                src={tweet.user.profile_image_url.replace('_normal', '_bigger')}
+                alt={tweet.user.name}
+                className="tweet-pfp"
+              />
+            )}
             <div className="tweet-user-info">
               <strong>{tweet.user?.name || 'Anonymous'}</strong>
               <span>@{tweet.user?.username || ''}</span>
             </div>
           </div>
+
           <p className="tweet-text">{tweet.text}</p>
-          {/* {imageUrl && <img src={imageUrl} alt="Tweet media" className="tweet-image" />}
-          {videoUrl && <video src={videoUrl} controls className="tweet-video" style={{ maxWidth: '100%', borderRadius: '12px' }} />} */}
+
+          {imageUrl && <img src={imageUrl} alt="Tweet media" className="tweet-image" />}
+          {videoUrl && <video src={videoUrl} controls className="tweet-video" />}
         </div>
       </div>
     </div>

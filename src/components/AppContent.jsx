@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Dashboard from './Dashboard';
 import Swal from 'sweetalert2';
 
+// ✅ Add FontAwesome import for copy icon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-regular-svg-icons';
+
 const AppContent = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -57,10 +61,18 @@ const AppContent = () => {
             </div>
           </div>
 
+          {/* ✅ Updated Contract Address Button with Copy Icon */}
           <div className="ca-module">
             <button className="ca-button neon-frame" onClick={copyCa}>
               <span className="ca-label">CONTRACT ADDRESS</span>
-              <span className="ca-hash">3ejk8LXA...Mykpump</span>
+              <span className="ca-hash">
+                3ejk8LXA...Mykpump
+                <FontAwesomeIcon 
+                  icon={faCopy} 
+                  className="copy-icon" 
+                  style={{ marginLeft: '8px', cursor: 'pointer' }}
+                />
+              </span>
             </button>
           </div>
         </div>
