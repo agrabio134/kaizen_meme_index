@@ -83,9 +83,6 @@ const LeaderboardView = ({ tokens, isMobile }) => {
                 </span>
                 <span>${(t.volume24h / 1000).toFixed(0)}K vol</span>
               </div>
-
-              {/* Votes */}
-              <div className="item-votes">{t.votes || 0}</div>
             </div>
           );
         })}
